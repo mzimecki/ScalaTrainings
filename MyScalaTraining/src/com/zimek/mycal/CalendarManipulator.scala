@@ -21,6 +21,7 @@ object CalendarManipulator {
 	 * Prints months day numbers.
 	 */
 	def printMonth() {
+		val currentDay = cal.get(Calendar.DAY_OF_MONTH)
 		val days = 
 			for(weekDay <- weekDays)
 				yield getDayAsString(weekDay._2)
@@ -29,6 +30,7 @@ object CalendarManipulator {
 			for (i <- 1 to cal.getActualMaximum(Calendar.DAY_OF_MONTH)) 
 				yield makeDaySequence(i)
 		
+		cal.set(Calendar.DAY_OF_MONTH, currentDay)
 		print(getBasicData + days.mkString + getEmptyDaysGap + monthTable.mkString)
 	}
 	
