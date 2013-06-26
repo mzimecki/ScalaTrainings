@@ -37,12 +37,12 @@ object CalendarManipulator {
 	/**
 	 * Prints basic data of current date.
 	 */
-	def getBasicData = "Today is: " + sdf.format(cal.getTime()) + ", week: " + cal.getMaximum(Calendar.WEEK_OF_YEAR) + "\n\n"
+	private def getBasicData = "Today is: " + sdf.format(cal.getTime()) + ", week: " + cal.getMaximum(Calendar.WEEK_OF_YEAR) + "\n\n"
 	
 	/**
 	 * Returns string representing one day entry in calendar.
 	 */
-	def makeDaySequence(dayNo: Int) = { 
+	private def makeDaySequence(dayNo: Int) = { 
 		val padding = " " * (4 - dayNo.toString.length())
 		if((dayNo + getIndexOfFirstDayOfaMonth - 1) % 7 == 0) 
 			padding + dayNo + "\n" 
@@ -53,12 +53,12 @@ object CalendarManipulator {
 	/**
 	 * Returns space until first day of a month.
 	 */
-	def getEmptyDaysGap = "    " * (getIndexOfFirstDayOfaMonth - 1) 
+	private def getEmptyDaysGap = "    " * (getIndexOfFirstDayOfaMonth - 1) 
 	
 	/**
 	 * Returns starting column of the first day of a month.
 	 */
-	def getIndexOfFirstDayOfaMonth = { 
+	private def getIndexOfFirstDayOfaMonth = { 
 		cal.set(Calendar.DAY_OF_MONTH, 1)
 		getDayIndex(cal.get(Calendar.DAY_OF_WEEK), weekDays.keysIterator)
 	}
