@@ -18,27 +18,47 @@ object CalendarManipulator {
 			(5 -> Calendar.FRIDAY), (6 -> Calendar.SATURDAY), (7 -> Calendar.SUNDAY))
 	
 	/**
-	 * Prints basic data of current date.
-	 */
-	def printBasicData() { 
-		println("Today is: " + sdf.format(cal.getTime()) + ", week: " + cal.getMaximum(Calendar.WEEK_OF_YEAR)) 
-	} 
-	
-	/**
 	 * Prints months day numbers.
 	 */
 	def printMonth() {
+		val days = 
+			for(weekDay <- weekDays)
+				yield getDayAsString(weekDay._2)
+		
+		val monthTable = 
+			for (i <- 1 to cal.getActualMaximum(Calendar.DAY_OF_MONTH)) 
+				yield makeDaySequence(i)
+		
+		print(getBasicData + days.mkString + getEmptyDaysGap + monthTable.mkString)
+	}
+	
+	/**
+	 * Prints basic data of current date.
+	 */
+	def getBasicData = "Today is: " + sdf.format(cal.getTime()) + ", week: " + cal.getMaximum(Calendar.WEEK_OF_YEAR) + "\n\n"
+	
+	/**
+	 * Returns string representing one day entry in calendar.
+	 */
+	def makeDaySequence(dayNo: Int) = { 
+		val padding = " " * (4 - dayNo.toString.length())
+		if((dayNo + getIndexOfFirstDayOfaMonth - 1) % 7 == 0) 
+			padding + dayNo + "\n" 
+		else 
+			padding + dayNo 
+	}
+	
+	/**
+	 * Returns space until first day of a month.
+	 */
+	def getEmptyDaysGap = "    " * (getIndexOfFirstDayOfaMonth - 1) 
+	
+	/**
+	 * Returns starting column of the first day of a month.
+	 */
+	def getIndexOfFirstDayOfaMonth = { 
 		cal.set(Calendar.DAY_OF_MONTH, 1)
-		weekDays.foreach(printDayAsString)
-		val startingDayIdx = getDayIndex(cal.get(Calendar.DAY_OF_WEEK), weekDays.keysIterator)
-		for(i <- 1 until startingDayIdx) print("    ")
-		for (i <- 1 to cal.getActualMaximum(Calendar.DAY_OF_MONTH)) {
-			if (i < 10)
-				print(" " + i + "  ")
-			else
-				print(i + "  ")
-			if ((i + startingDayIdx - 1) % 7 == 0) print("\n")
-		}
+		getDayIndex(cal.get(Calendar.DAY_OF_WEEK), weekDays.keysIterator)
 	}
 	
 	/**
@@ -60,15 +80,15 @@ object CalendarManipulator {
 	 * 
 	 * @param data data Tuple of index and day constant
 	 */
-	private def printDayAsString(data: (Int, Int)) {
+	private def getDayAsString(data: Int) = {
 		data match {
-			case (1, Calendar.MONDAY) => print("Mon ")
-			case (2, Calendar.TUESDAY) => print("Tue ")
-			case (3, Calendar.WEDNESDAY) => print("Wed ")
-			case (4, Calendar.THURSDAY) => print("Thu ")
-			case (5, Calendar.FRIDAY) => print("Fri ")
-			case (6, Calendar.SATURDAY) => print("Sat ")
-			case (7, Calendar.SUNDAY) => print("Sun\n")
+			case Calendar.MONDAY => " Mon "
+			case Calendar.TUESDAY => "Tue "
+			case Calendar.WEDNESDAY => "Wed "
+			case Calendar.THURSDAY => "Thu "
+			case Calendar.FRIDAY => "Fri "
+			case Calendar.SATURDAY => "Sat "
+			case Calendar.SUNDAY => "Sun\n"
 		}
 	}
 }
