@@ -1,9 +1,12 @@
-package com.zimek.rational
+package com.zimek.exercises.rational
 
 import java.io.FileReader
 import java.io.FileNotFoundException
 import java.io.IOException
 
+/**
+ * Chapters 1 - 7 code examples.
+ */
 object MainApp {
   
   //this allows for implicit conversion of integers into rationals

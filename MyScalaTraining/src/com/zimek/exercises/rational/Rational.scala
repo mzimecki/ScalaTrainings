@@ -1,4 +1,4 @@
-package com.zimek.rational
+package com.zimek.exercises.rational
 
 class Rational(n: Int, d: Int) {
 	require(d != 0)
@@ -40,3 +40,5 @@ class Rational(n: Int, d: Int) {
 	private def gdc(a: Int, b: Int): Int =
 		if (b == 0) a else gdc(b, a % b)
 }
+
+
