@@ -41,5 +41,24 @@ object FindLongLines {
 		l.filter(x => x > 3).foreach(println) //shorter form of function literal (target typing) - type of x is inferred
 		l.filter(_ > 2).foreach(println) // placeholder syntax
 		l.filter((_: Int) > 2).foreach(println) // placeholder syntax
+		
+		//partially applied functions
+		def sum(a: Int, b: Int, c: Int) = a + b + c
+		val s = sum(1, _: Int, 3)
+		println(s(2))
+		
+		//closures
+		var more = 1
+		val f = (x: Int) => x + more //more is not a parameter of a function but it is taken from functions environment (closing free variable)
+		println(f(2))
+		
+		//repeated parameters
+		def echo(args: String*) =
+		  for(arg <- args)
+		    print(arg + " ")
+		echo("s", "F")
+		val a = Array[String]("A", "F", "f")
+		// this won't compile echo(a)
+		echo(a: _*) //this is fine - but strange for me :)
 	}
 } 
