@@ -60,5 +60,15 @@ object FindLongLines {
 		val a = Array[String]("A", "F", "f")
 		// this won't compile echo(a)
 		echo(a: _*) //this is fine - but strange for me :)
+		
+		//tail recursion
+		def bang(x: Int): Int = 
+			if (x == 0) throw new Exception("bang!")
+			else bang(x - 1)
+		//bang(3) //this function is tail recursive since it has as a last call in its body the recursive call
+				//then compiler optimizes it and exception is thrown during first call! so it is as efficient as while loop
+				//it does not work with indirect call to the function it starts (recursion by using other function which 
+				//calls back the first function)
+				//it does not work on function values as well for e.g. val f = bang _ 
 	}
 } 
