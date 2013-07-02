@@ -41,6 +41,8 @@ object FindLongLines {
 		l.filter(x => x > 3).foreach(println) //shorter form of function literal (target typing) - type of x is inferred
 		l.filter(_ > 2).foreach(println) // placeholder syntax
 		l.filter((_: Int) > 2).foreach(println) // placeholder syntax
+
+		print("\n")
 		
 		//partially applied functions
 		def sum(a: Int, b: Int, c: Int) = a + b + c
@@ -71,4 +73,6 @@ object FindLongLines {
 				//calls back the first function)
 				//it does not work on function values as well for e.g. val f = bang _ 
 	}
+	
+	def sum(a: Int, b: Int, c: Int) = a + b + c
 } 
