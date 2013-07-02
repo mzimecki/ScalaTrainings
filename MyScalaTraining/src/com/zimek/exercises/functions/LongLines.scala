@@ -41,7 +41,7 @@ object FindLongLines {
 		l.filter(x => x > 3).foreach(println) //shorter form of function literal (target typing) - type of x is inferred
 		l.filter(_ > 2).foreach(println) // placeholder syntax
 		l.filter((_: Int) > 2).foreach(println) // placeholder syntax
-
+		
 		print("\n")
 		
 		//partially applied functions
