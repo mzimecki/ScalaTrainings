@@ -11,9 +11,9 @@ import scala.collection.mutable.LinkedHashMap
  * Provides useful methods connected to dates.
  */
 object CalendarManipulator {
-	val cal = new GregorianCalendar()
-	val sdf = new SimpleDateFormat("dd MMMM yyyy", Locale.US)
-	val weekDays = LinkedHashMap[Int, Int]((1 -> Calendar.MONDAY), 
+	private val cal = new GregorianCalendar()
+	private val sdf = new SimpleDateFormat("dd MMMM yyyy", Locale.US)
+	private val weekDays = LinkedHashMap[Int, Int]((1 -> Calendar.MONDAY), 
 			(2 -> Calendar.TUESDAY), (3 -> Calendar.WEDNESDAY), (4 -> Calendar.THURSDAY),
 			(5 -> Calendar.FRIDAY), (6 -> Calendar.SATURDAY), (7 -> Calendar.SUNDAY))
 	
