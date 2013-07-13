@@ -24,6 +24,7 @@ object MainApp {
     println(r4)
     println(r * r2)
     println(r / 3)
+    println(r2 < r4)
     
     println(2 * r)
     
