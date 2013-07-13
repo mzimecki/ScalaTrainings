@@ -1,4 +1,4 @@
-package com.zimek.exercises.traits
+package com.zimek.exercises.traits.rectang
 
 class Point(val x: Int, val y: Int)
 

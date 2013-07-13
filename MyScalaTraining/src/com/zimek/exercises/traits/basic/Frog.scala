@@ -1,4 +1,4 @@
-package com.zimek.exercises.traits
+package com.zimek.exercises.traits.basic
 
 class Frog extends Animal with Philosophical with HasLegs {
   override def toString = "I am a frog"

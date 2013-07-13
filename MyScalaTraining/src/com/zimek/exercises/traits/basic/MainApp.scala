@@ -1,4 +1,4 @@
-package com.zimek.exercises.traits
+package com.zimek.exercises.traits.basic
 
 object MainApp {
 	def main(args: Array[String]) {
