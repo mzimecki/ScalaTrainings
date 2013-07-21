@@ -10,6 +10,7 @@ class ElemSuiteFun extends FunSuite {
     expect(2) { //or use expect which also will give additional reason message on fail
       ele.width
     }
+    
     //intercept[IllegalArgumentException] { //to test whether exception will be thrown 
     //  elem('x', -2, 3)
     //}
