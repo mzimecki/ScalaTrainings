@@ -7,6 +7,9 @@ case class UnOp(operator: String, arg: Expr) extends Expr
 case class BinOp(operator: String,
                  left: Expr, right: Expr) extends Expr
 
+/**
+ * Case classes and pattern matching.
+ */
 object MainApp {
   def main(args: Array[String]) {
     val v = Var("x") //it's case class so "new" keyword is not needed
