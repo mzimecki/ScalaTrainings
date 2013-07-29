@@ -25,5 +25,47 @@ object MainApp {
     case BinOp("*", e, Number(1)) => e // Multiplying by one
     case _ => expr
   }
+
+  def wildcardPattern(expr: Expr) = expr match {
+    case BinOp(op, left, right) => println(expr + "is a binary operation")
+    //op, left, right can be replaced by _
+    //case BinOp(_, _, _) => println(expr +"is a binary operation")
+    case _ => println("It's something else")
+  }
+
+  def constantPattern(x: Any) = x match {
+    case 5 => "five"
+    case true => "truth"
+    case "hello" => "hi!"
+    case Nil => "the empty list"
+    case _ => "something else"
+  }
+
+  def variablePattern(expr: Int) = expr match {
+    case 0 => "zero"
+    case somethingElse => "not zero: " + somethingElse
+  }
+
+  def constructorPattern(expr: Expr) = expr match {
+    case BinOp("+", e, Number(0)) => println("a deep match")
+    case _ =>
+  }
+
+  def sequencePattern(expr: List[Int]) = expr match {
+    case List(0, _*) => println("found it") //checks if there is List with 0 at first place and _* says that you do not care about length
+    case List(0, _, _) => println("found it 2") //3 element list with 0 at the beginning
+    case _ =>
+  }
+
+  def tuplePattern(expr: Any) = expr match {
+    case (a, b, c) => println("matched " + a + b + c)
+    case _ =>
+  }
+
+  def typedPattern(x: Any) = x match {
+    case s: String => s.length
+    case m: Map[_, _] => m.size
+    case _ => -1
+  }
 }
 
