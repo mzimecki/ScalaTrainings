@@ -1,6 +1,6 @@
 package com.zimek.exercises.caseclass
 
-abstract class Expr
+sealed abstract class Expr //A sealed class cannot have any new subclasses added except the ones in the same file; "sealed" keyword is often a license to pattern matc
 case class Var(name: String) extends Expr
 case class Number(num: Double) extends Expr
 case class UnOp(operator: String, arg: Expr) extends Expr
@@ -11,11 +11,31 @@ case class BinOp(operator: String,
  * Case classes and pattern matching.
  */
 object MainApp {
+  val withDefault: Option[Int] => Int = {
+    case Some(x) => x
+    case None => 0
+  }
+
   def main(args: Array[String]) {
     val v = Var("x") //it's case class so "new" keyword is not needed
     val op = BinOp("+", Number(1), v) //looks nice when nested
     println(v.name) //class parameters are implicitly get vals so they are accessible
     println(op.right == Var("x")) //the compiler adds "natural" implementations of methods toString, hashCode, and equals
+  }
+
+  def describe(e: Expr): String = e match { //if super class of class used in pattern matching is sealed then we get this warning message
+    case Number(_) => "a number"
+    case Var(_) => "a variable"
+  }
+
+  def show(x: Option[String]) = x match {
+    case Some(s) => s
+    case None => "?"
+  }
+
+  def describe2(e: Expr): String = (e: @unchecked) match { //unchecked annotation for eliminating warning message
+    case Number(_) => "a number"
+    case Var(_) => "a variable"
   }
 
   def simplifyTop(expr: Expr): Expr = expr match {
