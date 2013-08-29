@@ -25,6 +25,10 @@ object Main {
     
     println(z.head)
     println(z.tail) //returns a list consisting of all elements except the first
-
+    
+    val lst = List(1,3) ::: List(4,5) //concatenation of lists
+    for(l <- lst)
+    	print(l + " ")
+    
   }
 }
