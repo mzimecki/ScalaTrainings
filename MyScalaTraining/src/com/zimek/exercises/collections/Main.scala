@@ -3,6 +3,7 @@ package com.zimek.exercises.collections
 import scala.collection.immutable.Queue
 import scala.collection.mutable.ArrayBuffer
 import scala.collection.mutable.ListBuffer
+import scala.collection.mutable.Stack
 
 object Main {
 	def main(args: Array[String]) {
@@ -35,5 +36,8 @@ object Main {
 	  q.dequeue
 	  
 	  //Stack
+	  val stack = new Stack[Int] 
+	  stack.push(1)
+	  stack.top
 	}
 }
