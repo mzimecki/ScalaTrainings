@@ -1,4 +1,4 @@
 ScalaTrainings
 ==============
 
-My Scala training projects
+My Scala training projects github pages 
