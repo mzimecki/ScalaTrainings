@@ -5,15 +5,13 @@ import java.util.Calendar
 import java.util.GregorianCalendar
 import java.util.Locale
 
-import scala.collection.mutable.LinkedHashMap
-
 /**
  * Provides useful methods connected to dates.
  */
 object CalendarManipulator {
 	private val cal = new GregorianCalendar()
 	private val sdf = new SimpleDateFormat("dd MMMM yyyy", Locale.US)
-	private val weekDays = LinkedHashMap[Int, Int]((1 -> Calendar.MONDAY), 
+	private val weekDays = List[(Int, Int)]((1 -> Calendar.MONDAY), 
 			(2 -> Calendar.TUESDAY), (3 -> Calendar.WEDNESDAY), (4 -> Calendar.THURSDAY),
 			(5 -> Calendar.FRIDAY), (6 -> Calendar.SATURDAY), (7 -> Calendar.SUNDAY))
 	
@@ -60,23 +58,23 @@ object CalendarManipulator {
 	 */
 	private def getIndexOfFirstDayOfaMonth = { 
 		cal.set(Calendar.DAY_OF_MONTH, 1)
-		getDayIndex(cal.get(Calendar.DAY_OF_WEEK), weekDays.keysIterator)
+		getDayIndex(cal.get(Calendar.DAY_OF_WEEK))
 	}
 	
 	/**
 	 * Returns index (map key) of given day.
 	 * 
 	 * @param dayOfAweek Day constant from {@link: Calendar} class
-	 * @param keysIterator Map keys iterator
 	 */
-	private def getDayIndex(dayOfAweek: Int, keysIterator: Iterator[Int]) : Int = {
-		if(keysIterator.hasNext) {
-			val key = keysIterator.next
-			if(weekDays.getOrElse(key, -1) == dayOfAweek) key
-			else getDayIndex(dayOfAweek, keysIterator)
-		} else -1
+	private def getDayIndex(dayOfAweek: Int) : Int = {
+		def findIdx(days: List[(Int, Int)]): Int = {
+			if(days.isEmpty) -1
+			else if (days.head._2 == dayOfAweek) days.head._1
+			else findIdx(days.tail)
+		}
+		findIdx(weekDays)
 	}
-	
+	  
 	/**
 	 * Prints day name.
 	 * 
