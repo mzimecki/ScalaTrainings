@@ -9,7 +9,7 @@ import java.util.Locale
  * Provides useful methods connected to dates.
  */
 object CalendarManipulator {
-  private val cal = new GregorianCalendar()
+  private val cal = new GregorianCalendar
   private val sdf = new SimpleDateFormat("dd MMMM yyyy", Locale.US)
   private val weekDays = List[(Int, Int)]((1 -> Calendar.MONDAY),
     (2 -> Calendar.TUESDAY), (3 -> Calendar.WEDNESDAY), (4 -> Calendar.THURSDAY),
@@ -18,30 +18,29 @@ object CalendarManipulator {
   /**
    * Prints months day numbers.
    */
-  def printMonth() {
-    print(getBasicData + daysAsString.mkString + getEmptyDaysGap + monthTable.mkString)
-  }
+  def printMonth() { print(getBasicData + daysAsString.mkString + getEmptyDaysGap + monthTable.mkString) }
 
   /**
    * Returns string with all week days as text.
    */
-  private def daysAsString(): String = {
+  private def daysAsString: String = {
       def iterate(days: List[(Int, Int)], acc: String): String = {
         if (days.isEmpty) acc
         else iterate(days.tail, acc + getDayAsString(days.head._2))
       }
     iterate(weekDays, "")
   }
-
+  
+  val lastDayOfMonth = cal.getActualMaximum(Calendar.DAY_OF_MONTH)
+  
   /**
    * Returns moth table as string.
    */
   private def monthTable(): String = {
-      def iterate(i: Int, acc: String): String = {
-        if (i > cal.getActualMaximum(Calendar.DAY_OF_MONTH)) acc
-        else iterate(i + 1, acc + makeDaySequence(i))
-      }
-    iterate(1, "")
+    (for {
+      i <- 1 to lastDayOfMonth
+      if (i < lastDayOfMonth)
+    } yield makeDaySequence(i)).mkString
   }
 
   /**
@@ -92,15 +91,13 @@ object CalendarManipulator {
    *
    * @param data data Tuple of index and day constant
    */
-  private def getDayAsString(data: Int) = {
-    data match {
-      case Calendar.MONDAY => " Mon "
-      case Calendar.TUESDAY => "Tue "
-      case Calendar.WEDNESDAY => "Wed "
-      case Calendar.THURSDAY => "Thu "
-      case Calendar.FRIDAY => "Fri "
-      case Calendar.SATURDAY => "Sat "
-      case Calendar.SUNDAY => "Sun\n"
-    }
+  private def getDayAsString(data: Int) = data match {
+    case Calendar.MONDAY => " Mon "
+    case Calendar.TUESDAY => "Tue "
+    case Calendar.WEDNESDAY => "Wed "
+    case Calendar.THURSDAY => "Thu "
+    case Calendar.FRIDAY => "Fri "
+    case Calendar.SATURDAY => "Sat "
+    case Calendar.SUNDAY => "Sun\n"
   }
 }
