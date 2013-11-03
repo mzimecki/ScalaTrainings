@@ -89,7 +89,7 @@ object CalendarManipulator {
   /**
    * Prints day name.
    *
-   * @param data data Tuple of index and day constant
+   * @param data data Tuple of index and day constant.
    */
   private def getDayAsString(data: Int) = data match {
     case Calendar.MONDAY => " Mon "
